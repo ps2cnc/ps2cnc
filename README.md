@@ -16,25 +16,25 @@ This project is also aimed at the hobby level.  If you had tens of thousands of 
 
 ![Alt text](./readme/cnc.png)
 
-Three axis, X,Y, and Z straight from high school math.
+Three axis, X,Y, and Z straight from high school math:
 
 [https://en.wikipedia.org/wiki/Coordinate_system](https://en.wikipedia.org/wiki/Coordinate_system)
 
 When you are looking at your machine, left and right is the X axis.  Forward and back is the Y axis and raising the bit up and down is the Z axis.
 
-Some move the gantry back and forth, some like the one pictured move a table back and forth to cover the Y axis.  (pros and cons to each)
+Some move the gantry (thing that goes up and over the top and back down) back and forth, some like the one pictured the gantry is fixed and the table moves back and forth to cover the Y axis.  (pros and cons to each)
 
-Hobby level at this point I would consider to be less than $1000 or even better less than $500.  I will cover demonstrations and tips and tricks at some point.  But for now, all metal construction, not plastic, screw drive not belt, and a spindle is preferred over a router.
+Hobby level at this point I would consider to be less than $1000 or even better less than $500.  I will cover demonstrations and tips and tricks at some point.  But for now, all metal construction, not plastic, screw drive not belt, and a spindle is preferred over a router.  Manual control knobs to move the screws.
 
-To use the wrong terminolgy you can think of this as moving a drill bit around cutting patterns into the material (wood, metal, plastic, ...).  The bits are often called end mill as this is simlar to a milling machine.  Or perhaps router bits although you should not necessarily use router bits.  (what bits to buy and how to use, is a very long story that will happen later).
+To use the wrong terminolgy you can think of this (CNC machine) as moving a drill bit around cutting patterns into the material (wood, metal, plastic, ...).  The bits are often called end mill as this is simlar to a milling machine.  Or perhaps router bits although you should not necessarily use actual router bits.  (what bits to buy and how to use, is a very long story that will happen later).
 
 These machines run off of a language called g-code, which we will see below.
 
 [https://en.wikipedia.org/wiki/G-code](https://en.wikipedia.org/wiki/G-code)
 
-The vast majority of the commands are telling the machine to either move rapidly above and not cutting through the material, and then telling the machine to cut the material at a slower speed, in straight lines.  And either use arc commands or make curves from many very tiny straight steps.
+The vast majority of the commands we use are telling the machine to either move rapidly above and not cutting through the material, and then telling the machine to cut the material at a slower speed, in straight lines.  And either use arc commands or make curves from many very tiny straight steps.
 
-G-code is specific to machines like this.  Certainly at the hobby level a CNC machine, a 3D printer and a laser engraver/cutter are generally very very similar.  You are moving some head around and that head either spins a bit, shoots a laser, or extrudes plastic.  And these use g-code.
+G-code is specific to machines like this.  Certainly at the hobby level a CNC machine, a 3D printer and a laser engraver/cutter are generally very very similar.  You are moving some head around and that head either spins a bit, shoots a laser, or extrudes plastic.  And these use g-code.  And have an X, Y and Z solution.
 
 End of the day you are creating cut paths.  Move the to a point on the path, lower the bit into the material and cut the path.  Repeat.
 
@@ -44,13 +44,13 @@ There are many G-code references, here are a couple from hobby level work.
 
 [https://www.linuxcnc.org/docs/2.5/html/gcode/gcode.html](https://www.linuxcnc.org/docs/2.5/html/gcode/gcode.html)
 
-The workhorse ones are G0 and G1, I think of them as moveto and lineto.  There are a few others that we may or may not need depending on the settings/defaults for our machines controller.  The language does have G2 and G3 to describe arcs, but you may find, certainly at the hobby level, that some CAM tools instead make a zillion very small tiny straight steps instead of describing a curve (you cannot tell visually, these are stepper motors, no matter what it is a zillion small straight steps).  Perhaps it had to do with some specific 8 bit mcu based controller in the past that could not support curve math or something, or who knows, in any case, 99.9...9% with a bunch of nines are these few commands.  Ones like I want to use inches or millimeters, happen once per file, if at all.
+The workhorse commands as mentioned above are G0 and G1, I think of them as moveto and lineto.  There are a few others that we may or may not need depending on the settings/defaults for our machines controller.  The language does have G2 and G3 to describe arcs, but you may find, certainly at the hobby level, that some CAM tools instead make a zillion very small tiny straight steps instead of describing a curve (you cannot tell visually, these are stepper motors, no matter what it is a zillion small straight steps).  Perhaps it had to do with some specific 8 bit mcu based controller in the past that could not support curve math or something, or who knows, in any case, 99.9...9% with a bunch of nines are these few commands.  Commands like use inches or use millimeters tend to happen once per file, if at all.
 
 ## SVG (Scaler Vector Graphic)
 
 [https://www.w3.org/TR/SVG11/Overview.html](https://www.w3.org/TR/SVG11/Overview.html)
 
-An SVG file was not created nor primarily used by CNC work.  It happens to have features that fit the needs here as it has the ability to define paths.  So you can directly convert the paths in the SVG file into cut paths on the machine.
+An SVG file was not created nor primarily used by CNC work.  It happens to have features that fit the needs here as it has the ability to define paths.  So you can directly convert the paths in the SVG file into cut paths on the machine.  One of the very popular tools uses SVG files.
 
 ## PostScript
 
@@ -60,15 +60,17 @@ If you search for PostScript Language Reference, you will find the PLRM, the lan
 
 [https://www.adobe.com/jp/print/postscript/pdfs/PLRM.pdf](https://www.adobe.com/jp/print/postscript/pdfs/PLRM.pdf)
 
-PostScript was not created for CNC, like SVG it has the ability to define paths, and I happen to know enough of it and like to use it.  There is maybe one or two people out there, so maybe there are three of us total.  Hopefully you will see the beauty of doing it this way and sometimes or all the time take this approach.  It truly is a natural fit but few people even know of PostScript despite everyone using PDFs day in and day out.
+PostScript was not created for CNC, like SVG it has the ability to define paths, and I happen to know enough of it and like to use it.  There is maybe one or two people out there, so maybe there are three of us total...Hopefully you will see the beauty of doing it this way and sometimes or all the time take this approach.  It truly is a natural fit but few people even know of PostScript despite everyone using PDFs day in and day out.
 
-PostScript is a programming language that is geared toward defining a page.  You likely know of the term PDF as in PDF file.  PDF is essentially compiled PostScript, you can convert back and forth.  Many PDF viewers will also support PostScript.  Apple saw the wisdom in using PostScript as a printer control language, and well after that time some percentage of the printers out there support PostScript directly if not then there are very widely used tools like ghostscript that can convert PostScript into native printer control languages so that your whole computer or publishing infrastructure/corporation can aim for PostScript and then the last mile is done by a converter.
+PostScript is a programming language that is geared toward defining a page.  You likely know of the term PDF as in PDF file.  PDF is essentially compiled PostScript, you can convert back and forth.  Many PDF viewers will also support PostScript.  (PS and PDF are separate definitions but have a relationship)  Apple saw the wisdom in using PostScript as a printer control language, and well after that time some percentage of the printers out there support PostScript directly if not then there are very widely used tools like ghostscript that can convert PostScript into native printer control languages so that your whole computer or publishing infrastructure/corporation can aim for PostScript and then the last mile is done by a converter.
 
-The PLRM is a pretty big book, I am a seasoned software developer and do not find it trivial nor easy.  But the parts we want to use, are trivial and easy.  We simply need to create paths, start a path here here, do some lines and curves, close the path.  There are free and open source tools that are based on libraries that no doubt some if not all of the software you use today that supports PDF for example is built upon.  I am a software developer so Linux is naturally the operating system of choice, and those that use it understand there are more tools that do more things for free that are trivial to download and install than you have time in your life to ever use or experiment with.  Including PostScript to PDF conversion and PDF to SVG.  Tools based on the same libraries are available for Windows or MAC so you can also do this on those platforms with free and open source tools.
+The PLRM is a pretty big book, I am a seasoned software developer and do not find it trivial nor easy.  But the parts we want to use, are trivial and easy.  We simply need to create paths, start a path here, do some lines and curves, close the path.  There are free and open source tools that are based on libraries that, no doubt, some, if not all, of the software you use today that supports PDF for example is built upon.  I am a software developer so Linux is naturally the operating system of choice, and those that use it understand there are more tools that do more things, for free, that are trivial to download and install, than you have time in your life to ever use or experiment with.  Including PostScript to PDF conversion and PDF to SVG.  Tools based on the same libraries are available for Windows or MAC so you can also do this on those platforms with free and open source tools.
 
 Even if you are not a programmer or dont want to be or find this too tedius our painful, there are still some nuggets of info about using SVG or CAM tools (CAM tools create the g-code from some input, of which many support SVG if not centered around it)
 
-DXF is another file format you will see mentioned.  It is also 2D based (like SVG), but I believe created by a CAD company.  I used to know that file format in detail and have since forgotten, I think it is based on points and polygons which is also a description of ... paths.  The items we are creating with these machines are not just two dimensional, they are 3D as with anything real.  Many things folks want to create if you look down from the top lets say can be represented by a two dimensional shape, that you cut part or all the way through the material.  Think of some big letters or initials of someones name.  A big letter D, several inches tall cut into some wood.  If you used a scroll saw or some tool like that you would draw a 2D representation of the letter on the top then cut it out vertically along those lines with your saw.  We are simply do that as well for some of our projects, most of what I do, well everything I do.  And that is what you tell the CAM tool, here is a path in the X/Y space, I want you to cut along that path this many inches or millimeters deep.  One important thing to know is that unlike a scroll saw you do not just try to cut the full depth in one pass.  You make many passes along the defined path, at increasing depths.  Some folks that have used a router understand that it is better to take multiple passes at increasing depths than trying to go full depth and slower.  Depth per pass and how fast to move the bit, called feeds and speeds, is another long discussion that will happen later.  And like some other things, 100% guaranteed that if you just try the numbers some other (even very reputable and experienced person) is using, you are likely to burn up the wood and or bits, and/or break bits (or your machine).
+DXF is another file format you will see mentioned.  It is also 2D based (like SVG), but I believe created by a CAD company.  I used to know that file format in detail and have since forgotten, I think it is based on points and polygons which is also a description of ... paths.  
+
+The items we are creating with these machines are not just two dimensional, they are 3D as with anything real.  Many things folks want to create, with CNC/laser, if you look down from the top, lets say, can be represented by a two dimensional shape.  A shape you cut part or all the way through the material.  Think of some big letters or initials of someones name.  A big letter D, several inches tall cut into some wood.  If you used a scroll saw or some tool like that you would draw a 2D representation of the letter on the top then cut it out vertically along those lines with your saw.  We are simply do that as well for some of our projects, most of what I do, well everything I do.  And that is what you tell the CAM tool (generates the g-code), here is a path in the X/Y space, I want you to cut along that path this many inches or millimeters deep.  One important thing to know is that unlike a jig or scroll saw you do not just try to cut the full depth in one pass.  You make many passes along the defined path, at increasing depths.  Some folks that have used a router understand that it is better to take multiple passes at increasing depths than trying to go full depth and slower.  (there are reasons why a router can take much more material out per pass and can cut much faster)  Depth per pass and how fast to move the bit is called feeds and speeds, which is another long discussion that will happen later.  And like some other things, 100% guaranteed that if you just try the numbers some other (even very reputable and experienced person) is using, you are likely to burn up the wood and or bits, and/or break bits (or your machine).
 
 # PS2CNC
 
@@ -86,9 +88,9 @@ showpage
 
 ![Alt text](./readme/000.png)
 
-The first line is the bare minimum to indicate this is a PostScript file, but the tools I use dont care if it is there.  Technically PostScript is stack based if you know what that means.  The next line pushes two zeros onto the stack first one is an X coordinate, the second a Y coordinate and the moveto then pops those off of the stack and uses them.  We dont need to know it is stack based technicality, we can just write easy to read and understand lines of PostScript knowing that for a moveto just make one line with X then Y then moveto.  Lineto also wants an X and Y coordinate.  stroke tells the interpreter to draw this path to this point.  showpage marks the end of the page, basically draw the whole page for me.
+The first line is the bare minimum to indicate this is a PostScript file, but the tools I use dont care if it is there.  Technically PostScript is stack based if you know what that means.  The next line pushes two zeros onto the stack first one is an X coordinate, the second a Y coordinate and the moveto then pops those off of the stack and uses them.  We dont need to know it is stack based, we can just write easy to read and understand lines of PostScript knowing that for a moveto just make a line with X then Y then moveto.  Lineto also wants an X and Y coordinate.  stroke tells the interpreter to draw this path we have defined up to this point (and reset for a new path).  showpage marks the end of the page, basically draw the whole page for me.
 
-The coordinate system is based on points at 72 points per inch.  One inch is 25.4 millimeters, you may not have much metric experience, but find a calculator and just deal with it and/or get some cheap rulers that have both.  I, literally, use those plastic school one foot rulers that have inches on one edge and is metric on the other, has three holes so you can clip it into a three ring binder.  g-code machines can technically be run in either metric or inches, but the ones I have experienced all default to millimeters.  The free CAM tools can use either, you just need to know what your machine defaults to and/or always make sure you or your tools are generating the commands.  You want to move it 20 millimeters but the machine is in inches mode and tries to move 20 inches and possibly damages the material, bit, or machine.  As they say measure twice, cut once.  You are going to constantly need to be on your toes with respect to measurements.  There will be a few steps from beginning to end and from one step to another there will be units with perhaps a units conversion, get in the habit of looking at what the tools are telling you.  There are some traps I will get to later, where you think it is one unit but the tool is thinking it is the other.
+The coordinate system is based on points at 72 points per inch.  One inch is 25.4 millimeters, you may not have much metric experience, but find a calculator and just deal with it and/or get some cheap rulers that have both.  I, literally, use those plastic, grade school, one foot, rulers that have inches on one edge and is metric (centimeters) on the other, has three holes so you can clip it into a three ring binder.  g-code machines can technically be run in either metric or inches, but the ones I have experienced all default to millimeters.  The free CAM tools can use either, you just need to know what your machine defaults to and/or always make sure you or your tools are generating the commands to select the units of measure.  You want to move it 20 millimeters (less than an inch) but the machine is in inches mode and tries to move 20 inches and possibly damages the material, bit, or machine.  As they say measure twice, cut once.  Develop good habits and personal processes to do things the same way every time and that will greatly reduce these kinds of mistakes.
 
 ```
 %!
@@ -101,7 +103,7 @@ showpage
 
 ![Alt text](./readme/001.png)
 
-moveto creates the starting point, the start of a path.  Each lineto draws a straight line from the last point to the defined point.  Our goal is to make "paths", a number of segments of lines or arcs that start at one point and end back at the starting point.  The closepath command will draw a line from the current location to the starting point for this path.
+moveto creates the starting point, the start of a path.  Each lineto draws a straight line from the last point to the defined point.  Our goal is to make "paths", a number of segments of lines or arcs that start at one point and end back at the starting point.  The closepath command will draw a line from the current location to the starting point for this path.  Stroke commits it to the page and showpage closes out the page.
 
 ```
 %!
@@ -129,7 +131,7 @@ Open SVG, local, and find your svg file.
 
 The controllers I use default to mm (millimeters) and mm/min for speed.  So click the make all mm link.  And see the diameter for example go from 0.125 (1/8th of an inch) to 3.175 mm
 
-Click on one of the lines in the path.  (yes a drawback to this tool is that you may have to try, sometimes many times to get the line, discussed later)
+Click on one of the lines in the path.  (yes a drawback to this tool is that you may have to try, sometimes many times to get the line, discussed later.  Thicker is better and with this tool does not affect the cut)
 
 Click Create Operation.
 
@@ -141,7 +143,7 @@ Click on zero lower left.
 
 Click on Save GCODE.  Local file.
 
-And it saves gcode.gcode to my Downloads directory.  If there is already a gcode.gcode it will start adding numbers to the filename, so I move the file from Downloads to where I am working.
+And it saves gcode.gcode to my Downloads directory.  If there is already a gcode.gcode it will start adding numbers to the filename, so I move the file from Downloads to where I am working so it does not do the number thing.
 
 ```
 G21         ; Set units to mm
@@ -178,9 +180,9 @@ M2
 
 Note the g-code language does not require a new line for each movement nor does it require two nor all three coordinates per G0/G1 command.
 
-Looking at the jscut web page the defaults use rates that are crazy fast for what we will use on our machine, but those defaults show up in the file (since we did not change them) 2540 mm/min for Rapid movement, 127 mm/min for Plunge (Z movement down into the material, and back out), 1016 mm/min for cutting (x/y movement).  If you want to cut a path some depth into the material basically you move the bit down a little, then do all the X/Y stuff at that depth, then move the bit down and repeat all the X/Y stuff until you get the depth you want.  Think about it, the bit is round and spinning.
+Looking at the jscut web page the defaults use rates that are crazy fast for what we will use on our machine, but those defaults show up in the file (since we did not change them) 2540 mm/min for Rapid movement, 127 mm/min for Plunge (Z movement down into the material, and back out), 1016 mm/min for cutting (X/X movement while in the material).  If you want to cut a path some depth into the material basically you move the bit down a little, then do all the X/Y stuff at that depth, then move the bit down and repeat all the X/Y stuff until you get the depth you want.  Think about it, the bit is round and spinning.
 
-The CAM tool does not have to start the path where you started it in your PostScript/SVG.  Likewise it does not have to follow the path in the direction you described the path.  More on this later.  Jscut uses the terms pocket, engrave, inside, outside.  Engrave means cut exactly on the path I have described.  Inside means do the math to have the cut path such that it just cuts inside the path described.  Yes corners less than 180 degrees will not be sharp they will have the curve of the radius of the bit.  Outside means cut a path such that the cut is just outside the shape of the path.  And likewise with corners less than a 180 degree turn will not be sharp.
+The CAM tool does not have to start the path where you started it in your PostScript/SVG.  Likewise it does not have to follow the path in the direction you described the path.  More on this later.  Jscut uses the terms pocket, engrave, inside, outside.  Engrave means cut exactly on the path I have described.  Inside means do the math to have the cut path such that it just cuts inside the path described.  Yes corners less than 180 degrees will not be sharp they will have the curve of the radius of the bit.  Outside means cut a path such that the cut is just outside the shape of the path.  And likewise with corners less than a 180 degree turn will not be sharp.  A round brush cannot clean the floor all the way into the corner of the room.
 
 Some PostScript
 
@@ -198,7 +200,7 @@ The relevant parts of the SVG file (ps2pdf, pdf2svg).
 
 There is a chapter in the SVG spec on Paths and within that you see moveto, closepath and lineto.
 
-Starting here in the SVG
+We start here in this SVG file
 
 ```
 transform="matrix(0.1,0,0,-0.1,0,792)
@@ -217,7 +219,7 @@ L 360 720  lineto X Y
 Z          closepath
 ```
 
-It is not safe to assume SVG is 72 points per inch.  You will find very popular tools do not assume that.  Will cover this in detail later, another reason for using jscut right now is because I know it is 72 points per inch.  Will get to other CAM tools later.  Even in jscut there is a number in the corner (to not mess with), pixels not points.  We see below that it really did use 72 as the default (one inch which is 25.4 mm).  Note one of the tools between PostScript to PDF to SVG likes this times ten thing so 720 and 360 vs 72 and 36.  That is all taken care of in the transform and we will see later the transforms in SVG can be useful.  The S stands for scalar, so it is easy to scale.
+It is not safe to assume SVG is 72 points per inch.  You will find very popular tools do not assume that.  Will cover this in detail later, another reason for using jscut right now is because I know it is 72 points per inch.  Will get to other CAM tools later.  Even in jscut there is a number in the corner (to not mess with), pixels not points.  We see below that it really did use 72 as the default (one inch, 72 points, is 25.4 mm).  Note one of the tools between PostScript to PDF to SVG likes this times ten thing so 720 and 360 vs 72 and 36.  That is all taken care of in the transform and we will see later the transforms in SVG can be useful.  The S stands for scalar, so it is easy to scale by adding transforms.
 
 ```
 G0 X12.7000 Y25.4000
@@ -226,7 +228,7 @@ G1 X25.4000 Y12.7000
 G1 X12.7000 Y25.4000
 ```
 
-A bit of a purist view of what the g-code should have been.  I mentioned that because you can change the speed on the fly you can use only G0 or only G1 and for whatever reason jscut only uses G1.  The language references imply that G0 is for rapid movement (as in not cutting through material) and G1 is a cut motion.  And you can have separate G0 and G1 feed values, setting each once or rarely and going back and forth.  More on this later.
+A bit of a purist view of what the g-code should have been.  I mentioned that because you can change the speed on the fly in g-code so you can use only G0 or only G1 and for whatever reason jscut only uses G1.  The language references imply that G0 is for rapid movement (as in not cutting through material) and G1 is a cut motion.  And you can have separate G0 and G1 feed values, setting each once or rarely and going back and forth.  More on this later.
 
 ```
 G0 X12.7000 Y25.4000   moveto X Y
@@ -259,7 +261,7 @@ showpage
 
 ![Alt text](./readme/003.png)
 
-Yes sure, I could easily add a bounding box, I would still translate the design to the middle of it or to some place so that the design fits within that bounding box.
+Yes sure, I could easily add a bounding box, but I would still translate the design to the middle of it or to some place so that the design fits within that bounding box.
 
 ```
 G21         ; Set units to mm
@@ -317,11 +319,11 @@ G1 Z2.5400 F500
 M2
 ```
 
-0.0 setgray  0 is black 1 is white and anything in between is a shade of gray.
+0.0 setgray, 0 is black 1 is white and anything in between is a shade of gray.
 
 1.0 setlinewidth, this is the default, it comes into play with a very popular and very important tool.
 
-306 396 translate you dont want to do more than one translate it as with many other PostScripty things accumulate in an undesireable, will cover that later.
+306 396 translate, you dont want to do more than one translate it as with many other PostScripty things accumulate in an undesireable, will cover that later.
 
 I created a square this time in jscut I selected Zero Center, because I like it that way, will talk about that later.
 
@@ -351,9 +353,9 @@ showpage
 
 ![Alt text](./readme/004.png)
 
-If you remember from school or you can search for the unit circle.  Zero degrees is to the right, 90 is straight up, 180 to the right 270 down...360 degrees in a circle if using degrees.  2 PI (3.14.....forever) in radians.  Arc is used for increasing, positive, counter clockwise direction around the circle.  arcn for the other direction.  The five numbers are the X and Y of the CENTER of the radius.  The third is the radius.  Fourth and fifth are the start and end angle in degrees.
+If you remember from school or you can search the web for the unit circle.  Zero degrees is to the right, 90 is straight up, 180 to the right 270 down...360 degrees in a circle if using degrees.  2 PI (3.14.....forever) in radians.  Arc is used for increasing, positive, counter clockwise direction around the circle.  arcn for the other direction.  The five numbers are the X and Y of the CENTER of the radius.  The third is the RADIUS.  Fourth and fifth are the start and end angle in degrees.
 
-Note from the image that I did not have to lineto between the moveto/starting point and the beginning of the curve.  You can also, at least with the PostScript tools I use, not start with a moveto if you start with an arc.  Depends on how you want to define the shape.  
+Note from the image that I did not have to lineto between the moveto/starting point and the beginning of the curve, but there is a line.  You can also, at least with the PostScript tools I use, not start with a moveto if you start with an arc (and the starting point of the arc is the starting point of the path).  Depends on how you want to define the shape.  
 
 ```
 G21         ; Set units to mm
@@ -659,9 +661,9 @@ G1 X25.3954 Y0.4920
 ...
 ```
 
-Estlcam, a popular, free, good, CAM tool, can/will generate G2/G3 commands and you can choose to enable/disable them and use G1 commands instead like jscut above.
+Estlcam, a popular, free, good, CAM tool, can/will generate G2/G3 commands and you can choose to enable/disable them and use G1 commands like jscut above.
 
-This is the whole Estlecam g-code:
+This is the whole Estlecam g-code (with G2/G3 enabled):
 
 ```
 (Project 004)
@@ -700,14 +702,14 @@ G01 Z0.0000 F600 S24000
 G01 Z-1.0000
 G01 Y0.0000 F1200
 ```
-This transition other than plunging into the material, is a Y movement from the top corner to the lower left corner of the design.
+This transition other than plunging into the material, is a Y movement from the top corner to the lower left corner of the design.  X did not change so was left out of subsequent lines.
 
 ```
 G01 Y0.0000 F1200
 G01 X25.4000
 ```
 
-And this is the transition from lower left to lower right.  Have to pay a bit more attention to see what is going on.  Yes, smaller files, less bandwidth to the machine, etc and what really matters is controlling the machine not making life easier for the humans...
+And this is the transition from lower left to lower right without specifying Y of zero both times.  Have to pay a bit more attention to see what is going on.  Yes, smaller files, less bandwidth to the machine, etc and what really matters is controlling the machine not making life easier for the humans...
 
 While on this tangent...
 
@@ -750,13 +752,7 @@ G0 Z2
 
 OpenBuilds CAM not only has a G1 for every movement and an X and a Y, it has it all Feed, X, Y, Z and spindle Speed.
 
-You are not necessarily ready to send g-code to a machine yet, there are more things you need to know and possibly do.
-
-
-
-
-
-
+Note you are not ready to send g-code to your machine yet.  You need to know about running your spindle or router, and about feeds and speeds and how deep to cut per pass, and when cutting "pockets" what step over is and what to specify there.
 
 # Viewers/senders
 
@@ -770,4 +766,28 @@ A screen shot of the arc example above
 
 [Camotics Screen Shot](readme/Camotics004.png)
 
-Once you start using a real bit size, camotics defaults to I think a 2 mm diameter by 10 mm deep, a quirky interface but click in the tool table (right/double finger click) new tool, may have to delete some digits in order to add others...I know...but you can do it and then the cut may look correct compared to what you were expecting.  (using the wrong size bit in a sim for a "pocket" will not necessarily look like a pocket but may look like a bunch of parallel grooves).  Maybe there is a way to save a default (3.175mm x say 20mm), I have not bothered to figure that out.  I have used this tool thousands of times.
+Once you start doing pockets, camotics defaults to I think a 2 mm diameter by 10 mm deep, a quirky interface but click in the tool table (right/double finger click) new tool, may have to delete some digits in order to add others...I know...but you can do it and then the cut may look correct compared to what you were expecting.  (if only doing sims at first then tell the CAM tool to use a 2mm bit)(using the wrong size bit in a sim for a "pocket" will not necessarily look like a pocket but may look like a bunch of parallel grooves).  Maybe there is a way to save a default (3.175mm x say 20mm), I have not bothered to figure that out.  I have used this tool thousands of times.
+
+When I use the term senders I mean a program that sends the gcode to your CNC machine.  To digress your machine, in some way, has X, Y and Z motors that move the spindle or router around.  There is a small computer/processor called a microcontroller (MCU) that takes the g-code and parses it and tells the motors to move.  There are motor drivers that may or may not be separate, small, boards plugged into the main controller board.  In the same way that the battery on your car powers the cars computer (ECU), which runs the engine, it is the engine that drives the wheels.  The controller interprets and tells the motors what to do and is generally powered by the usb cable that plugs into board.  The power supply that plugs into the board powers the motor controllers (like gas/petrol powers your engine).  The controllers I have used the MCU powers up when the usb cable is plugged in and you can even tell it to do stuff and it thinks it is running the machine, but without the motor controllers powered nothing moves.  (this is actually perhaps a good thing for simulation purposes, more on that later).  
+
+One way the machines we can afford work is some come with, included, or extra cost, a small, klunky thing on a cable that might have a small display and a handful of buttons.  You can plug an sd card into it with your gcode file and then somehow tell it to run that file.  Been there, done that, trashed wood and bits and fortunately not my machine.  Save your money.  The other way and these machines also have this is, as mentioned, a usb cable that you plug into a computer and then you need some software.  A sender program I am calling it.  Your machine may come with some software, for windows, and that might work fine, likely you can run one of many options as generally the machine presents itself over the usb as a standard serial interface and you simply shove gcode over it.  Depending on the controller and the firmware there may be communication other than the g-code and that may be where some software works and some does not.  
+
+If you are coming here from (hobby level) 3D printing you may have heard of marlin or klipper, and those are great...for...3D printing.  You may have seen one or more discussions or pages on how you can use these for CNC.  Technically yes, but if you are reading this, then no.  There is no good info on how to do it, what looks like it might be...isnt.  You basically have to be a programmer/software engineer and hack your way through it, possibly modifying the firmware, etc.  I managed, it was painful and the experience overall sucked.  Not remotely worth it.  There is one called chilipeppr which has the same feel-ish.  You setup a raspberry pi near the CNC machine on your home network and from a computer also on the network you go to a web page that takes the g-code and sends it.  
+
+It is not required but a nice feature is that many of these programs in some way have a visual drawing of the machine running showing the cut path and in some way showing where you are in the cut (changing colors of the path or having the path already cut disappear).  Ideally using your mouse you can grab and move/translate the image to see it from different angles.  Like the ones mentioned above, some the main program is on the computer that is physically plugged into the usb cable for the machines controller.  Others you can or have to have a separate computer (the raspberry pi is a computer) sitting next to and plugged into the CNC machine and the real sending program is on another machine.  This was a fail for me, solveable but a fail, longer story.  
+
+There are many other solutions, some old and well used, where I landed happened to be the tool recommended by my machine vendor, but is good in general.
+
+(https://github.com/Denvi/Candle)[https://github.com/Denvi/Candle]
+
+Candle runs on Linux, windows or mac.  It runs on a computer next to your machine (did I mention that owning a CNC machine very quickly involves more equipment).  I run it on Linux of course, but you can use windows or mac.  I use a free thing called VNC that is basically a remote desktop.  Machine and the computer running Candle is in the garage with the machine.  I am inside with another computer and with VNC I have a window on the house computer that is the whole desktop of the garage computer and then I can run Candle and whatever else on the garage computer as if I were sitting there using its mouse and keyboard.  (in my case it is a very very tiny computer with no keyboard, mouse or monitor, other than setting it up and fixing it, I only use it remotely)($150).  A nice thing about this solution is if for whatever reason I want to do something else on the house computer or walk away and the screen saver goes on or goes into a power savings the CNC machine does not stop and the project might not get damaged.  The garage computer is not affected by the house computer not being connected to it.  YMMV.  You can do this with most of these programs.  At the, umm, blue and yellow brick and mortar store, you can get new laptops that are more than adequate of running one of these tools, for $150 or less than $200.
+
+I recommend you go ahead and try different tools not just senders, but simulators and CAM tools, etc.  Even trying different ways to create SVG or DXF files.
+
+Candle along with other tools I use to examine the generated g-code, well before committing to running the machine.  If you are cutting a square such that you want the material left is 10 mm on a side.  Then the bit has to cut a path half the bit width wider than the path so that what is left is this 10mm square.  If the bit has a 2 mm diameter then it is a 1mm radius and the path around the edges is 1mm away from what we want to remain.  So it is 1mm wider on one side and 1mm wider on the other side, if you use jscut and select lower left then the x and y will show 12 mm the 10 plus one on each side for the cut path.  If you open this in camotics, it adds a little for visual purposes and gives some number larger than 12.  Candle though shows the reality though it shows the 12 mm if lower left, if you select zero center than -6 to +6mm.  If the material you are cutting is say 15 mm tall and 30 mm wide that you are cutting this square out of, the camotics dimentions may cause concern that you messed something up and that media is to small.  A separate topic but if you buy a specific Arduino board that is relatively easy to load the grbl firmware onto.  It is basically as described above, a controller with the motor drivers turned off or in this case not even there, you can plug the usb cable into a computer, Candle will see it as a CNC machine and you can tell it to run your design and see Candle run as if it were cutting.  A good way to see exactly what it looks line from the sending computer.  Similar tricks can be played on some of the other senders, but not all.
+
+# A little more PostScript fun.
+
+
+
+
