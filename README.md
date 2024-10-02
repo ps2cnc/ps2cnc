@@ -788,6 +788,223 @@ Candle along with other tools I use to examine the generated g-code, well before
 
 # A little more PostScript fun.
 
+```
+%!
+0.0 setgray
+1.0 setlinewidth
+306 396 translate
+0 0 moveto
+72 0 lineto
+72 72 lineto
+closepath
+stroke
+showpage
+```
+
+![Alt text](./readme/005.png)
+
+Nothing new, special yet, but what if I did this:
+
+```
+%!
+0.0 setgray
+1.0 setlinewidth
+306 396 translate
+
+0 0 moveto
+72 0 lineto
+72 72 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 72 lineto
+closepath
+stroke
+
+showpage
+```
+
+![Alt text](./readme/006.png)
+
+Or eventually
+
+```
+%!
+0.0 setgray
+1.0 setlinewidth
+306 396 translate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+72 36 lineto
+closepath
+stroke
+
+showpage
+```
+![Alt text](./readme/007.png)
+
+There are times for paranoia or other reasons I may want to protect myself.  If you do a gsave it will basically save the settings you are at, including the rotation you are at,  and then grestore will put you back.
 
 
+Here I use a 315 degree rotate to rotate back to zero (360)(360-45 = 315).
 
+```
+%!
+0.0 setgray
+1.0 setlinewidth
+306 396 translate
+
+0 0 moveto
+72 0 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+closepath
+stroke
+
+315 rotate
+
+0 0 moveto
+36 10 lineto
+stroke
+
+45 rotate
+
+0 0 moveto
+36 10 lineto
+stroke
+
+showpage
+```
+![Alt text](./readme/008.png)
+
+Using gsave and grestore that puts me back at zero, I do not have to do, and redo the math if I change the first thing to something else.
+
+```
+%!
+0.0 setgray
+1.0 setlinewidth
+306 396 translate
+
+gsave
+
+0 0 moveto
+72 0 lineto
+closepath
+stroke
+
+45 rotate
+
+0 0 moveto
+72 0 lineto
+closepath
+stroke
+
+grestore
+
+gsave
+
+0 0 moveto
+36 10 lineto
+stroke
+
+45 rotate
+
+0 0 moveto
+36 10 lineto
+stroke
+
+grestore
+
+showpage
+```
+![Alt text](./readme/008.png)
+
+Note that the SVG files produced by these last two examples is identical.  Two ways to get to the same place.  In the examples and videos you will see me do this a lot.
+
+This is an example of a design you will see me make.
+
+![Alt text](./readme/circles1.png)
+
+If you think about it and visualize it, I only have a few things I have to actually create.
+
+![Alt text](./readme/circles2.png)
+
+It may be hard to see but not just the circle and the S shaped thing, but the inside cutout is made of, in this case, 6 arcs, which I might not have used a bright enough color.  Also the outside of the shape is made up of 6 arcs that I can use rotate to draw.
+
+The S shaped thing is not necessarily trivial, many of my designs use intersecting circles that I do some math to compute the angle to the intersection then draw them using arcs.  I will have an example and video specifically covering how I do that, basically one of a zillion web pages that does the math for you, which I understand but you may not remember from high school math, but that is okay, I give you the answer to some extent.  With that building block and some others I can then create a whole slew of Celtic and other historically inspired designs.  
+
+# Inkscape
+
+(https://inkscape.org)[https://inkscape.org]
+
+Inkscape is one of these, free, tools like blender that if you master it, really master it, you can have a career in just using that tool to do stuff for people.  In theory, technically, you could do what I generate from PostScript using inkscape.  I have tried...and failed...often crashing inkscape.  If nothing else though you will want to learn just enough about inkscape to use it for two main things.  One is to scale your design, you may create or download or otherwise acquire an SVG design that might be 8 inches by 8 inches but you want it six inches by six inches, inkscape...You may wish to use sendcutsend (highly recommended) to cut one of your designs out in some material, as of this writing the do not support SVG directly, so you need to convert (and possibly also scale) your SVG design to a DXF.  Inkscape does not necessarily like to import/read DXF but it will definitely output DXF and you can then definitely use that to have your design cut.  Some other CAM tools support both SVG and DXF some support DXF and not SVG.
+
+I will do a whole video and write up about the issues using inkscape to scale your designs, why it failed when you watched someones video on how to do it and it completely failed for you.  I mentioned way up above that SVG is not necessarily assumed to be 72 pixels per inch.  It does not have to be inches at all.  When I use the tools I use (that you can easily get and use too on Linux, windows or mac) to get from PostScript to PDF to SVG, those are all in units of points at 72 points per inch.  Inkscape will take the SVG file produced in that manner and know/assume it is 72 points per inch.  Jscut will take that SVG file as created and assume it is 72 points per inch.  OpenBuilds CAM very much not at this time even though I spent a number of days working with the developer (and somewhere I have the patch to fix the source).  Estlcam you have to carefully select the right units when you read the file otherwise you can have it vastly wrong.  Inkscape to the rescue, but, only if you know how to use it.  The steps are very easy to have a high chance of success, at the same time, just like there is value in knowing a little g-code so you can inspect what the CAM tool is producing (more on that later) there is a little value in inspecting the SVG code (not as easy to read, but I will go through it), and or using Inkscape or CAM or other tools to examine the converted file to see if the units are what you are trying to make them.  There are also bounding box issues with the CAM tools so far mentioned, one set of steps to scale or convert through Inkscape may work perfection for person A that uses process B to generate their SVG files and then uses CAM tool C to generate g-code.  But person J does everything the same but uses CAM tool D and the Inkscape conversion from person A is a complete fail.  This is very much a know your tools thing, and develop a process thing.  You can skip steps if they do not apply to your tools, but sharing your process with others may fail for them if they want to use a different tool going in or out.  Maybe your process works great for SVG files you create, but you pay for and download one from some site and it is a failure and you struggle to figure out why.  I do not and will not have all the CAM tools, etc.  But I have worked through a number of nuances among the tools mentioned to provide at least a starting point on some of the tests/experiments you can do to figure out how to make the tools work for your process.
+
+A shortcut to this demonstration is that Inkscape (and other SVG generating tools) can put their mark in the file, when you export a plain svg vs Inkscape svg, you can examine the differences in a simple file and see exactly what I mean.  Some consumers of the SVG files may look for these marks and make decisions on how to import the file.  There are units and other things that can be in the SVG file that might influence a consumer of that file (CAM tool, Inkscape itself) as to how to interpret it.  The bounding box, assumed or defined, may influence CAM tools in different ways.  The ones mentioned jscut, openbuilds cam and estlcam all treat the bounding box differently and can produce different, undesirable, results.  The last (or perhaps first demonstrated) is SVG, the G stands for graphics, the thickness of the line is part of the image.  Inkscape sees this as an image.  And the dimensions of the image include the thickness of the line.  The CAM tools see this as a file that describes paths, and the paths are along the center of the line independent of the thickness.  So while, yes, it is a fraction of an inch, but might be as big as a millimeter sometimes, using Inkscape to scale your design can cause it to be incorrect by some amount which can, very much, affect the success or failure of what you are trying to make.  (and there are simple ways around this).
