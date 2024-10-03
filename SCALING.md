@@ -50,8 +50,113 @@ showpage
 
 ![Alt text](./readme/100.png)
 
+Starting with jscut.  You can skip trying it yourself, Ill provide the relevant files, images, or descriptions.
+
+[https://jscut.org/jscut.html](https://jscut.org/jscut.html)
+
+At the top Open SVG, and open 100.svg.  You will see the square.  
+
+On the right side click Make all mm.  On the left side in the Tool box Diameter should change to mm 3.175.  We will just leave these numbers as is for this demonstration.
+
+Click on one of the lines of the square.  The box turns blue.
+
+Upper left click Create Operation.  Box turns black, it now has a new line with Pocket 3.175 Deep and a generate link.  
+
+Click on pocket and change it to engrave.
+
+Then click on Generate.
+
+Lower right-ish click on Zero lower left.
+
+Note that Max X and Max Y are 25.4 
+
+144-72 = 72.  72 points is an inch.  One inch is 25.4 mm.  Which is what we wanted.
+
+Save GCODE at the top.  Local file.
+
+```
+G21         ; Set units to mm
+G90         ; Absolute positioning
+G1 Z2.54 F2540      ; Move to clearance level
+
+;
+; Operation:    0
+; Name:         
+; Type:         Engrave
+; Paths:        1
+; Direction:    Conventional
+; Cut Depth:    3.175
+; Pass Depth:   3.175
+; Plunge rate:  127
+; Cut rate:     1016
+;
+
+; Path 0
+; Rapid to initial position
+G1 X25.4000 Y25.4000 F2540
+G1 Z0.0000
+; plunge
+G1 Z-3.1750 F127
+; cut
+G1 X0.0000 Y25.4000 F1016
+G1 X0.0000 Y0.0000
+G1 X25.4000 Y0.0000
+G1 X25.4000 Y25.4000
+G1 X25.4000 Y25.4000
+; Retract
+G1 Z2.5400 F2540
+M2
+```
+
+This is a success.  There is a process to follow in figuring things out.  Try to change as few things per experiment as you can...This would be fine as inches too, but others default to mm and want to try to produce compatible output.
+
+Estlcam.  Now estlcam has some setup things that it remembers, so I hope that mine is not setup so different from yours that your experience is different.  At the same time we know the goal here is a square 25.4 mm on a side, cut along the square.
+
+Start Estlcam and open the file.  I see an SVG Unit? dialog box.  And it has a checkbox on Point I click okay without changing it.
+
+Click on Engraving on the left then click on the box.  The box lines turn red.
+
+Do not need to mess with other settings.
+
+File -> Save CNC program.  
+
+A box for cutting depth, mine shows 1.00mm I just leave that and click okay.
+
+I close the box that pops up and then exit the program.
+
+```
+(Project 100)
+(Created by Estlcam version 11 build 11.245)
+(Machining time about 00:00:08 hours)
+
+(Required tools:)
+(End mill 3mm)
+G21
+G90
+G94
+M03 S24000
+G00 Z5.0000
 
 
+(No. 1: Engraving 1)
+G00 X0.0000 Y25.4000
+G00 Z0.5000
+G01 Z0.0000 F600 S24000
+G01 Z-1.0000
+G01 Y0.0000 F1200
+G01 X25.4000
+G01 Y25.4000
+G01 X0.0000
+G00 Z5.0000
+G00 Y0.0000
+
+M05
+M30
+```
+
+Another success.
+
+Notice so far, that while the "image" in all forms (PS, PDF, SVG) have a wide border around the box, the bounding box.  These two tools extrated the path(s) and defined the X and Y zero position of the output g-code based on the left and bottom of the path(s) not anything else.
 
 
 
