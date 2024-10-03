@@ -1001,7 +1001,7 @@ The S shaped thing is not necessarily trivial, many of my designs use intersecti
 
 # Inkscape
 
-(https://inkscape.org)[https://inkscape.org]
+[https://inkscape.org](https://inkscape.org)
 
 Inkscape is one of these, free, tools like blender that if you master it, really master it, you can have a career in just using that tool to do stuff for people.  In theory, technically, you could do what I generate from PostScript using inkscape.  I have tried...and failed...often crashing inkscape.  If nothing else though you will want to learn just enough about inkscape to use it for two main things.  One is to scale your design, you may create or download or otherwise acquire an SVG design that might be 8 inches by 8 inches but you want it six inches by six inches, inkscape...You may wish to use sendcutsend (highly recommended) to cut one of your designs out in some material, as of this writing the do not support SVG directly, so you need to convert (and possibly also scale) your SVG design to a DXF.  Inkscape does not necessarily like to import/read DXF but it will definitely output DXF and you can then definitely use that to have your design cut.  Some other CAM tools support both SVG and DXF some support DXF and not SVG.
 
@@ -1009,7 +1009,7 @@ I will do a whole video and write up about the issues using inkscape to scale yo
 
 A shortcut to this demonstration is that Inkscape (and other SVG generating tools) can put their mark in the file, when you export a plain svg vs Inkscape svg, you can examine the differences in a simple file and see exactly what I mean.  Some consumers of the SVG files may look for these marks and make decisions on how to import the file.  There are units and other things that can be in the SVG file that might influence a consumer of that file (CAM tool, Inkscape itself) as to how to interpret it.  The bounding box, assumed or defined, may influence CAM tools in different ways.  The ones mentioned jscut, openbuilds cam and estlcam all treat the bounding box differently and can produce different, undesirable, results.  The last (or perhaps first demonstrated) is SVG, the G stands for graphics, the thickness of the line is part of the image.  Inkscape sees this as an image.  And the dimensions of the image include the thickness of the line.  The CAM tools see this as a file that describes paths, and the paths are along the center of the line independent of the thickness.  So while, yes, it is a fraction of an inch, but might be as big as a millimeter sometimes, using Inkscape to scale your design can cause it to be incorrect by some amount which can, very much, affect the success or failure of what you are trying to make.  (and there are simple ways around this).
 
-(The truth about Inkscape scaling)[SCALING.md]
+[The truth about Inkscape scaling](SCALING.md)
 
 
 
