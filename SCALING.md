@@ -926,21 +926,21 @@ PERFECT!!!  I got my 2.0 scaling, did not have to go in and hand search and repl
 
 So what are the steps, after creating or downloading or whatever your SVG.
 
-Open in Inkscape
+### Open in Inkscape
 
-Select the image
+### Select the image
 
-Change the stroke width to zero with the minus button
+### Change the stroke width to zero with the minus button
 
-Pick your units to scale to inches or mm or whatever
+### Pick your units to scale to inches or mm or whatever
 
-Lock the lock between width and height W: and H:
+### Lock the lock between width and height W: and H:
 
-Scale either Width or Height to your desire
+### Scale either Width or Height to your desire
 
-File->Document Properties
+### File->Document Properties
 
-Click on resize to content
+### Click on resize to content
 
 If your cam tool is sensitive to stroke width then move/remove the Document Properties window so you can see the stroke width.  Use the plus button to make it the width you want.
 
