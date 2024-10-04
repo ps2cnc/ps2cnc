@@ -942,11 +942,11 @@ So what are the steps, after creating or downloading or whatever your SVG.
 
 ### Click on resize to content
 
-If your cam tool is sensitive to stroke width then move/remove the Document Properties window so you can see the stroke width.  Use the plus button to make it the width you want.
+### If your cam tool is sensitive to stroke width then move/remove the Document Properties window so you can see the stroke width.  Use the plus button to make it the width you want.
 
-File -> Save as Inkscape SVG unless you know you can get away with Plain SVG or even Inkscape SVG so long as that does not create problems for your CAM tool.
+### File -> Save as Inkscape SVG unless you know you can get away with Plain SVG or even Inkscape SVG so long as that does not create problems for your CAM tool.
 
-Select a directory, name the file and save.
+### Select a directory, name the file and save.
 
 When exiting inkscape it may ask to save the file, just close without saving.
 
